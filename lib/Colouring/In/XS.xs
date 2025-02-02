@@ -95,7 +95,8 @@ static int numIs (SV * num) {
 	dTHX;
 	char * str = SvPV_nolen(num);
 	char tmp[256];
-	for(int i=0;str[i];i++) {
+	int i;
+	for (i = 0; str[i]; i++) {
  	 	int j=0;
   		while(str[i]>='0' && str[i]<='9') {
      			tmp[j]=str[i];
@@ -180,13 +181,15 @@ static SV * hex2rgb (char * colour) {
 	AV * color = newAV();
 	int l = strlen(colour);
 	if (l == 3) {
-		for (int i = 0; i < 3; i++) {
+		int i;
+		for (i = 0; i < 3; i++) {
 			char * hex = malloc(sizeof(char)*22);
 			sprintf(hex, "%c%c", colour[i], colour[i]);
 			av_push(color, newSViv(hex2int(hex)));
 		}
 	} else if (l == 6) {
-		for (int i = 0; i < 6; i += 2) {
+		int i;
+		for (i = 0; i < 6; i += 2) {
 			char * hex = malloc(sizeof(char)*22);;
 			sprintf(hex, "%c%c", colour[i], colour[i + 1]);
 			av_push(color, newSViv(hex2int(hex)));
@@ -202,7 +205,8 @@ static AV * numbers (char * colour) {
 	AV * color = newAV();
 	int len = strlen(colour);
 	char temp[6] = "";
-	for (int i = 0; i < len; i++) {
+	int i;
+	for (i = 0; i < len; i++) {
 		if ((colour[i] >= '0' && colour[i] <= '9') || colour[i] == '.') {
 			strncat(temp, &colour[i], 1);
 		} else if (strlen(temp) >= 1 && atol(temp) >= 0) {
@@ -483,7 +487,8 @@ toCSS(self, ...)
 			sprintf_colour(self, css, "#%02lx%02lx%02lx");
 			if (!s) {
 				int min = 1;
-				for (int i = 1; i < 7; i += 2) {
+				int i;
+				for (i = 1; i < 7; i += 2) {
 					if (css[i] != css[i+1]) {
 						min = 0;
 						break;
@@ -558,7 +563,8 @@ toHEX(self, ...)
 		sprintf_colour(self, css, "#%02lx%02lx%02lx");
 		if (! SvTRUE(ST(1)) || (SvTRUE(ST(1)) && SvTYPE(ST(1)) != SVt_IV)) {
 			int min = 1;
-			for (int i = 1; i < 7; i += 2) {
+			int i;
+			for (i = 1; i < 7; i += 2) {
 				if (css[i] != css[i+1]) {
 					min = 0;
 					break;
