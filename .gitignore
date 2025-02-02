@@ -5,4 +5,5 @@ Makefile
 blib/
 lib/Colouring/In/XS.bs
 lib/Colouring/In/XS.c
+lib/Colouring/In/XS.o
 pm_to_blib
